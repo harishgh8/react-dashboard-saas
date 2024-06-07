@@ -1,4 +1,4 @@
-import { SignedIn, UserButton } from "@clerk/clerk-react";
+import { UserButton, useOrganization, useUser } from "@clerk/clerk-react";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -37,11 +37,27 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
+  const { isLoaded, user } = useUser();
+  const { organization, memberships } = useOrganization({ memberships: true });
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 
+  if (!isLoaded) {
+    // Handle loading state however you like
+    return null;
+  }
+
+  if (!user) return null;
+
+  const updateUser = async () => {
+    await user.update({
+      firstName: "John",
+      lastName: "Doe",
+    });
+  };
   return (
     <Box
       sx={{
@@ -81,7 +97,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  SubDiscord
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -101,18 +117,23 @@ const Sidebar = () => {
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 /> */}
               </Box>
-              <Box textAlign="center">
-                <SignedIn>
-                  <UserButton showName={true} />
-                </SignedIn>
-                {/* <Typography
-                  variant="h2"
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+              >
+                <UserButton />
+                <Typography
+                  variant="h3"
                   color={colors.grey[100]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Harish
-                </Typography> */}
+                  {user?.firstName} {user?.lastName}
+                </Typography>
+
                 {/* <Typography variant="h5" color={colors.greenAccent[500]}>
                   ABC Corp
                 </Typography> */}
