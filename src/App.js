@@ -1,22 +1,22 @@
+import { SignedIn, SignedOut } from "@clerk/clerk-react";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import Topbar from "./scenes/global/Topbar";
-import Sidebar from "./scenes/global/Sidebar";
-import Dashboard from "./scenes/dashboard";
-import Team from "./scenes/team";
-import Invoices from "./scenes/invoices";
-import Contacts from "./scenes/contacts";
+import { Route, Routes } from "react-router-dom";
+import SignInPage from "./scenes/SignInPage/SignInPage";
 import Bar from "./scenes/bar";
+import Calendar from "./scenes/calendar/calendar";
+import Contacts from "./scenes/contacts";
+import Dashboard from "./scenes/dashboard";
+import FAQ from "./scenes/faq";
 import Form from "./scenes/form";
+import Geography from "./scenes/geography";
+import Sidebar from "./scenes/global/Sidebar";
+import Topbar from "./scenes/global/Topbar";
+import Invoices from "./scenes/invoices";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
-import FAQ from "./scenes/faq";
-import Geography from "./scenes/geography";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import Team from "./scenes/team";
 import { ColorModeContext, useMode } from "./theme";
-import Calendar from "./scenes/calendar/calendar";
-import { SignedIn, SignedOut } from "@clerk/clerk-react";
-import SignInPage from "./scenes/SignInPage/SignInPage";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -48,7 +48,7 @@ function App() {
           </div>
         </SignedIn>
         <SignedOut>
-          <SignInPage></SignInPage>
+          <SignInPage />
         </SignedOut>
       </ThemeProvider>
     </ColorModeContext.Provider>
