@@ -145,6 +145,7 @@ const FormComponent = () => {
   const [url, setUrl] = useState("");
   const [error, setError] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [showData, setShowData] = useState(false);
 
   const {
     setData,
@@ -181,58 +182,74 @@ const FormComponent = () => {
     }
   };
 
+  const handleShowData = () => {
+    setShowData(true);
+  };
   return (
-    <Container maxWidth="sm">
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 4 }}
-      >
-        <Typography variant="h4" component="h1" gutterBottom>
-          API Data Fetcher
-        </Typography>
-        <TextField
-          label="User ID"
-          variant="outlined"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          required
-        />
-        <TextField
-          label="Password"
-          variant="outlined"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <TextField
-          label="API URL"
-          variant="outlined"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          required
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
-      </Box>
+    <>
+      <Container maxWidth="md">
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 4 }}
+        >
+          <Typography variant="h4" component="h1" gutterBottom>
+            API Data Fetcher
+          </Typography>
+          <TextField
+            label="User ID"
+            variant="outlined"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            required
+          />
+          <TextField
+            label="Password"
+            variant="outlined"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <TextField
+            label="API URL"
+            variant="outlined"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            required
+          />
+          <Button type="submit" variant="contained" color="primary">
+            Submit
+          </Button>
+        </Box>
 
-      {isSuccess && (
-        <>
-          <Alert severity="success" sx={{ mt: 2 }}>
-            Connection complete!
+        {isSuccess && (
+          <>
+            <Alert severity="success" sx={{ mt: 2 }}>
+              Connection complete!
+            </Alert>
+            <DataTable />
+          </>
+        )}
+
+        {error && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            Connection not complete: {error}
           </Alert>
-          <DataTable />
-        </>
+        )}
+      </Container>
+      {showData && (
+        <Box mt={4}>
+          <Typography variant="h6">Data:</Typography>
+          <pre>{JSON.stringify(formCompdata, null, 2)}</pre>
+        </Box>
       )}
-
-      {error && (
-        <Alert severity="error" sx={{ mt: 2 }}>
-          Connection not complete: {error}
-        </Alert>
+      {showData && (
+        <Container maxWidth="md">
+          <DataTable />{" "}
+        </Container>
       )}
-    </Container>
+    </>
   );
 };
 
