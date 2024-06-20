@@ -18,8 +18,9 @@ import Line from "./scenes/line";
 import Pie from "./scenes/pie";
 import Team from "./scenes/team";
 import { ColorModeContext, useMode } from "./theme";
-import FormComponent from "./scenes/FormComponent/FormComponent";
+import FormComponent from "./scenes/ConfigForm/ConfigForm";
 import DataTable from "./scenes/DataTable";
+import ConfigForm from "./scenes/ConfigForm/ConfigForm";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -36,7 +37,7 @@ function App() {
               <main className="content">
                 <Topbar setIsSidebar={setIsSidebar} />
                 <Routes>
-                  <Route path="/" element={<FormComponent />} />
+                  <Route path="/" element={<ConfigForm />} />
                   <Route path="/DataTable" element={<DataTable />} />
                   <Route path="/team" element={<Team />} />
                   <Route path="/contacts" element={<Contacts />} />

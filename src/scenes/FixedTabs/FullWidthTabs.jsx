@@ -13,7 +13,6 @@ import LineChart from "../../components/LineChart";
 import ProgressCircle from "../../components/ProgressCircle";
 import { mockTransactions } from "../../data/mockData";
 import { tokens } from "../../theme";
-import DataGridComponent from "../ChartData/ChartData";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
