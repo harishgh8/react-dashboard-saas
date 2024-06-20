@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { DataContext } from "../../context/Datacontext";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const DataTable = () => {
   const { data } = useContext(DataContext);
@@ -54,7 +54,10 @@ const DataTable = () => {
   ];
 
   return (
-    <Box sx={{ height: 600, width: "100%" }}>
+    <Box sx={{ height: 600, width: "80%", p: 8 }}>
+      <Typography variant="h4" component="h1" sx={{ mb: 4 }}>
+        Data to Review
+      </Typography>
       <DataGrid
         rows={data.results}
         columns={columns}

@@ -3,11 +3,8 @@ const crypto = require("crypto");
 require("dotenv").config();
 
 const algorithm = "aes-256-cbc";
-// const secretKey = Buffer.from(process.env.SECRET_KEY, "base64");
-const secretKey = Buffer.from(
-  "ee2KUbhsBcaKpGYmB6krG+xsZl6QGcUGGiDI+OUtxDk=",
-  "base64"
-);
+const secretKey = Buffer.from(process.env.SECRET_KEY, "base64");
+
 const ivLength = 16;
 
 const encrypt = (text) => {

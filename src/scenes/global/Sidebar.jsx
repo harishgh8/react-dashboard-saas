@@ -1,5 +1,5 @@
 import { UserButton, useOrganization, useUser } from "@clerk/clerk-react";
-import { SettingsOutlined } from "@mui/icons-material";
+import { ArrowRightAlt, SettingsOutlined } from "@mui/icons-material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import axios from "axios";
@@ -89,7 +89,9 @@ const Sidebar = () => {
     const handleClick = () => {
       setSelected(title);
       if (toggleConfigList) {
-        setIsSelectConfigFromList(!isSelectConfigFromList);
+        setIsSelectConfigFromList(true);
+      } else {
+        setIsSelectConfigFromList(false);
       }
     };
 
@@ -193,13 +195,13 @@ const Sidebar = () => {
               icon={<SettingsOutlined />}
               selected={selected}
               setSelected={setSelected}
-              toggleConfigList={isSelectConfigFromList}
+              toggleConfigList={false}
             />
 
             <Item
               title="Select from the list"
               to="/"
-              icon={<SettingsOutlined />}
+              icon={<ArrowRightAlt />}
               selected={selected}
               setSelected={setSelected}
               toggleConfigList={true}
